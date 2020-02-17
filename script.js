@@ -2,14 +2,17 @@ const video = document.getElementById('video');
 const cameraSensor = document.querySelector("#camera--sensor");
 const startVideoBtn = document.getElementById('btn');
 const takeSelfieBtn = document.getElementById('selfie-btn');
+const downloadImg = document.getElementById('img-to-download');
 const constraints = { video: { facingMode: "user" }, audio: false };
+
 
 const canvas = document.getElementById('canvas');
 canvas.width = 650;
-canvas.height = 480;    
+canvas.height = 480;
 
 canvas.style.display = "none";
 cameraSensor.style.display = "none";
+downloadImg.style.display = "none";
 
 startVideoBtn.addEventListener('click', () => {
     navigator.mediaDevices
@@ -26,7 +29,7 @@ takeSelfieBtn.addEventListener('click', () => {
     cameraSensor.width = video.videoWidth;
     cameraSensor.height = video.videoHeight;
     cameraSensor.getContext("2d").drawImage(video, 0, 0);
-    let imgToLego = cameraSensor.toDataURL("image/webp");
+    let imgToLego = cameraSensor.toDataURL("image/png");
     drawImg(imgToLego);
 });
 
@@ -51,7 +54,7 @@ const loadImage = async (src) => {
 
 const drawImg = async imgToLego => {
     const context = canvas.getContext('2d');
-    const lego = new legra(context, 24, {color: 'blue'});
+    const lego = new legra(context, 21, {color: 'blue'});
     try {
         const img = await loadImage(imgToLego);
         context.clearRect(0, 0, 650, 480);
@@ -59,10 +62,10 @@ const drawImg = async imgToLego => {
         video.style.display = "none";
         cameraSensor.style.display = "none";
         canvas.style.display = "block";
-
+        let imgToDownload = canvas.toDataURL("image/png");
+        downloadImg.href = imgToDownload;
+        downloadImg.style.display = "block"
     } catch (err) {
         console.error(err);
     }
   };
-
-
