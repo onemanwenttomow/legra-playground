@@ -1,7 +1,36 @@
-canvas = document.getElementById('canvas');
-context = canvas.getContext('2d');
+const video = document.getElementById('video');
+const cameraSensor = document.querySelector("#camera--sensor");
+const startVideoBtn = document.getElementById('btn');
+const takeSelfieBtn = document.getElementById('selfie-btn');
+const constraints = { video: { facingMode: "user" }, audio: false };
 
-const lego = new legra(context, 16, {color: 'blue'});
+const canvas = document.getElementById('canvas');
+canvas.width = 650;
+canvas.height = 480;    
+
+canvas.style.display = "none";
+cameraSensor.style.display = "none";
+
+startVideoBtn.addEventListener('click', () => {
+    navigator.mediaDevices
+        .getUserMedia(constraints)
+        .then(stream => {
+            video.srcObject = stream;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+});
+
+takeSelfieBtn.addEventListener('click', () => {
+    cameraSensor.width = video.videoWidth;
+    cameraSensor.height = video.videoHeight;
+    cameraSensor.getContext("2d").drawImage(video, 0, 0);
+    let imgToLego = cameraSensor.toDataURL("image/webp");
+    drawImg(imgToLego);
+});
+
+
 
 const loadImage = async (src) => {
     return new Promise((resolve, reject) => {
@@ -20,16 +49,20 @@ const loadImage = async (src) => {
     });
   };
 
-const drawImg = async () => {
-    console.log("drawing...")
+const drawImg = async imgToLego => {
+    const context = canvas.getContext('2d');
+    const lego = new legra(context, 24, {color: 'blue'});
     try {
-      const img = await loadImage('https://images-na.ssl-images-amazon.com/images/I/81Wgl8rZpHL._AC_SY679_.jpg');
-      context.clearRect(0, 0, 500, 500);
-      lego.drawImage(img, [0, 0]);
+        const img = await loadImage(imgToLego);
+        context.clearRect(0, 0, 650, 480);
+        lego.drawImage(img, [0, 0]);
+        video.style.display = "none";
+        cameraSensor.style.display = "none";
+        canvas.style.display = "block";
+
     } catch (err) {
-      console.error(err);
+        console.error(err);
     }
   };
 
-drawImg();
 

@@ -3,11 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Legra Playground</title>
 </head>
 <body>
 
-    <canvas id="canvas" height="500px" width="500px"></canvas>
+    <div class="container">
+        <video id="video" autoplay></video>
+        <div class="btn-container">
+            <button id="btn">Click me</button>
+            <button id="selfie-btn">SELFIE!</button>
+        </div>
+        <canvas id="camera--sensor"></canvas>
+        <canvas id="canvas"></canvas>
+
+    </div>
+
+
+
+
 
 
     <script src="https://unpkg.com/legra?browser"></script>
