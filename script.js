@@ -7,13 +7,18 @@ const downloadImg = document.getElementById("img-to-download");
 const constraints = { video: { facingMode: "user" }, audio: false };
 
 const canvas = document.getElementById("canvas");
-canvas.width = 650;
+canvas.width = 640;
 canvas.height = 480;
 
-canvas.style.display = "none";
+// canvas.style.display = "none";
 cameraSensor.style.display = "none";
 downloadImg.style.display = "none";
 anotherSelfieBtn.style.display = "none";
+
+const context = canvas.getContext("2d");
+const lego = new legra(context, 20);
+lego.rectangle(0, 0, 32, 32, { filled: true, color: 'green' });
+
 
 permissionBtn.addEventListener("click", () => {
     navigator.mediaDevices
@@ -59,8 +64,6 @@ const loadImage = async src => {
 };
 
 const drawImg = async imgToLego => {
-    const context = canvas.getContext("2d");
-    const lego = new legra(context, 20, { color: "blue" });
     try {
         const img = await loadImage(imgToLego);
         context.clearRect(0, 0, 650, 480);

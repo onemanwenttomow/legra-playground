@@ -3,22 +3,34 @@
     overflow: hidden;
 }
 
-video {
-    height: 680px;
-    width: 500px;
+main {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.container {
+video {
+    position: absolute;
+}
+
+.main-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+
+/* .container {
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-}
+} */
 
 .btn-container {
-    position: absolute;
+    /* position: absolute; */
     z-index: 10;
     top: 0;
 }
