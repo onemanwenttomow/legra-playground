@@ -1,11 +1,12 @@
 const video = document.getElementById("video");
 const cameraSensor = document.querySelector("#camera--sensor");
 const permissionBtn = document.getElementById("permission-btn");
-const takeSelfieBtn = document.getElementById("selfie-btn");
+const makeBricksBtn = document.getElementById("make-bricks-btn");
 const anotherSelfieBtn = document.getElementById("another-btn");
 const downloadImg = document.getElementById("img-to-download");
 const userImage = document.getElementById("user-image");
 const constraints = { video: { facingMode: "user" }, audio: false };
+var userUploadedImg;
 
 const canvas = document.getElementById("canvas");
 canvas.width = 640;
@@ -34,12 +35,20 @@ permissionBtn.addEventListener("click", () => {
         });
 });
 
-takeSelfieBtn.addEventListener("click", () => {
-    cameraSensor.width = video.videoWidth;
-    cameraSensor.height = video.videoHeight;
-    cameraSensor.getContext("2d").drawImage(video, 0, 0);
-    let imgToLego = cameraSensor.toDataURL("image/png");
-    drawImg(imgToLego);
+makeBricksBtn.addEventListener("click", () => {
+    console.log(document.querySelector('main').children[0].nodeName)
+    if (document.querySelector('main').children[0].nodeName === 'IMG') {
+        document.querySelector('main').children[0].style.display = 'none';
+        console.log("userUploadedImg", userUploadedImg)
+        drawImg(userUploadedImg);
+    } else {
+        cameraSensor.width = video.videoWidth;
+        cameraSensor.height = video.videoHeight;
+        cameraSensor.getContext("2d").drawImage(video, 0, 0);
+        let imgToLego = cameraSensor.toDataURL("image/png");
+        drawImg(imgToLego);
+    }
+    
 });
 
 anotherSelfieBtn.addEventListener("click", () => {
@@ -112,12 +121,17 @@ userImage.addEventListener('change', function(e) {
                         height = max_size;
                     }
                 }
-                console.log("width: ", width, "height: ", height)
                 canvas.width = width;
                 canvas.height = height;
                 canvas.getContext('2d').drawImage(image, 0, 0, width, height);
-                var dataUrl = canvas.toDataURL('image/jpeg');
-                drawImg(dataUrl);
+                userUploadedImg = canvas.toDataURL('image/jpeg');
+                var newImg = new Image();
+                console.log("userUploadedImg after upload...", userUploadedImg)
+                newImg.src = userUploadedImg;
+                newImg.style.position = "absolute";
+                document.querySelector('main').prepend(newImg);
+                document.querySelector('main').children[0].style.display = 'block';
+
             }
             image.src = readerEvent.target.result;
         }
@@ -149,22 +163,3 @@ var dataURLToBlob = function(dataURL) {
 
     return new Blob([uInt8Array], {type: contentType});
 }
-
-// document.addEventListener("imageResized", function (event) {
-//     var data = new FormData($("form[id*='uploadImageForm']")[0]);
-//     if (event.blob && event.url) {
-//         data.append('image_data', event.blob);
-//         console.log("data: ", data)
-//         // $.ajax({
-//         //     url: event.url,
-//         //     data: data,
-//         //     cache: false,
-//         //     contentType: false,
-//         //     processData: false,
-//         //     type: 'POST',
-//         //     success: function(data){
-//         //        //handle errors...
-//         //     }
-//         // });
-//     }
-// });
