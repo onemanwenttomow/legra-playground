@@ -4,25 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
     <title>Legra Playground</title>
 </head>
 <body>
     <div class="main-container">
         <div class="sidebar">
-            <div class="btn-container">
-                <button id="permission-btn">Give permission to camera</button>
-                <button id="another-btn">Another selfie?</button>
+            <h1>Brick Me</h1>
+            <div class="step1">
+                <h2>Step 1: </h2>
+                <h3>Upload image or take selfie</h3>
             </div>
-            <input type="file" name="" id="user-image">
-            <button id="make-bricks-btn">Make Me Lego</button>
+            <div class="step1-options">
+                <div class="btn-container">
+                    <button class="btn small" id="permission-btn">Give permission to camera</button>
+                    <button class="btn" id="another-btn">Another selfie?</button>
+                </div>
+                <div class="divider"></div>
+                <input type="file" name="" id="user-image">
+            </div>
+            <div class="step2">
+                <h2>Step 2: </h2>
+                <h3>Click button below to transform into lego</h3>
+            </div>
+            <button class="btn" id="make-bricks-btn">Make Me Lego</button>
             
-            <a id="img-to-download" href="" download="brick-me">Download</a>
         </div>
         
         <main>
             <canvas id="canvas"></canvas>
             <video id="video" autoplay></video>
             <canvas id="camera--sensor"></canvas>
+            <a id="img-to-download" href="" download="brick-me">Download</a>
         </main>
     </div>
 

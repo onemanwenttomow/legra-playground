@@ -1,6 +1,31 @@
+/* https://colorhunt.co/palette/25729 */
+/* 
+#222831
+#393e46
+#00adb5
+#00fff5 */
+
 * {
     margin: 0;
     overflow: hidden;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+    color: #00fff5;
+
+}
+
+h1 {
+    font-size: 5em;
+    /* text-align: center; */
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+    margin: 0 20px;
+
+}
+
+h2, h3 {
+    margin: 5px 20px;
 }
 
 main {
@@ -9,6 +34,7 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #393e46;
 }
 
 video {
@@ -18,25 +44,56 @@ video {
 .main-container {
     display: grid;
     grid-template-columns: 1fr 3fr;
+    min-height: 100vh;
 }
 
-/* .container {
-    position: relative;
+.sidebar {
+    background-color: #222831;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
+}
+
+.step1-options {
+    display: flex;
     align-items: center;
-    min-height: 100vh;
-} */
-
-.btn-container {
-    /* position: absolute; */
-    z-index: 10;
-    top: 0;
 }
 
-#canvas {
-    /* position: absolute; 
-    top: 0;
-    left: 0; */
+.divider {
+    margin: 10px;
+    width: 5px;
+    height: 70%;
+    background-color: #00adb5;
 }
+
+.btn {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    margin-top: 20px;
+    background-color: #00adb5;
+    color: #222831;
+    padding: 20px 20px;
+    font-size: 2em;
+    text-transform: uppercase;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    box-shadow: 3px 3px #00fff5;
+    margin: 20px;
+}
+  
+.btn:hover {
+    box-shadow: 1px 1px #00fff5;
+    top: 1px;
+}
+
+.btn:active {
+    box-shadow: none;
+    top: 1px
+}
+
+.small {
+    font-size: 1em;
+}
+
