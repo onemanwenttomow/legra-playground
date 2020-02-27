@@ -66,6 +66,14 @@ video {
     background-color: #00adb5;
 }
 
+.drop-area {
+    background-color: #00adb5;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .btn {
     border: none;
     outline: none;

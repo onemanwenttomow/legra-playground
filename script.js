@@ -5,6 +5,8 @@ const makeBricksBtn = document.getElementById("make-bricks-btn");
 const anotherSelfieBtn = document.getElementById("another-btn");
 const downloadImg = document.getElementById("img-to-download");
 const userImage = document.getElementById("user-image");
+const dropArea = document.getElementsByClassName('drop-area')[0];
+
 const constraints = { video: { facingMode: "user" }, audio: false };
 var userUploadedImg;
 
@@ -56,6 +58,13 @@ anotherSelfieBtn.addEventListener("click", () => {
     video.style.display = "block";
 });
 
+dropArea.addEventListener('drop', handleDrop, false)
+userImage.addEventListener('change', handleChange);
+
+function handleDrop(e) {
+    console.log('DROP!');
+}
+
 const loadImage = async src => {
     return new Promise((resolve, reject) => {
         const img = new Image();
@@ -89,8 +98,7 @@ const drawImg = async imgToLego => {
     }
 };
 
-
-userImage.addEventListener('change', function(e) {
+function handleChange(e) {
     var img = new Image();
     console.log("file changed!")
     console.log(userImage.files[0]);
@@ -138,7 +146,8 @@ userImage.addEventListener('change', function(e) {
         reader.readAsDataURL(file);
     }
 
-});
+}
+
 
 var dataURLToBlob = function(dataURL) {
     var BASE64_MARKER = ';base64,';
